@@ -3,15 +3,16 @@ using FDMToDoListProject.DataAccess.Repository.IRepository;
 using FDMToDoListProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FDMToDoListProject.Controllers
+namespace FDMToDoListProjectWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _categoryRepo;
 
         public CategoryController(ICategoryRepository db)
         {
-			_categoryRepo = db; // constructor to access to db
+            _categoryRepo = db; // constructor to access to db
         }
 
         public IActionResult Index()
@@ -40,8 +41,8 @@ namespace FDMToDoListProject.Controllers
                 return View(); // if validation check fails, stay on the page
             }
 
-			_categoryRepo.Add(obj);
-			_categoryRepo.Save();
+            _categoryRepo.Add(obj);
+            _categoryRepo.Save();
             return RedirectToAction("Index", "Category");
             // create a redirection to reload list, and you can explictly state
             //which controller to use
@@ -49,7 +50,7 @@ namespace FDMToDoListProject.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (id == null || id==0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
@@ -62,42 +63,42 @@ namespace FDMToDoListProject.Controllers
                 return NotFound();
             }
             return View(categoryFromDb);
-		}
+        }
 
-		[HttpPost]
-		public IActionResult Edit(Category obj)
-		{
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
 
-			_categoryRepo.Update(obj);
-			_categoryRepo.Save();
-			return RedirectToAction("Index", "Category");
-		}
+            _categoryRepo.Update(obj);
+            _categoryRepo.Save();
+            return RedirectToAction("Index", "Category");
+        }
 
-		public IActionResult Delete(int? id)
-		{
-			if (id == null || id == 0)
-			{
-				return NotFound();
-			}
-			Category categoryFromDb = _categoryRepo.Get(u => u.Id == id);
-			if (categoryFromDb == null)
-			{
-				return NotFound();
-			}
-			return View(categoryFromDb);
-		}
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category categoryFromDb = _categoryRepo.Get(u => u.Id == id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
 
-		[HttpPost, ActionName("Delete")]
-		public IActionResult DeletePOST(int? id)
-		{
-			Category categoryFromDb = _categoryRepo.Get(u => u.Id == id);
-			if (categoryFromDb == null)
-			{
-				return NotFound();
-			}
-			_categoryRepo.Remove(categoryFromDb); //update method
-			_categoryRepo.Save();
-			return RedirectToAction("Index", "Category");
-		}
-	}
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category categoryFromDb = _categoryRepo.Get(u => u.Id == id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            _categoryRepo.Remove(categoryFromDb); //update method
+            _categoryRepo.Save();
+            return RedirectToAction("Index", "Category");
+        }
+    }
 }

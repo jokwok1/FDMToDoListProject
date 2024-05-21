@@ -42,6 +42,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"); // ? means id can be defined or null
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"); // ? means id can be defined or null
+    // area added, default Customer
 
 app.Run();

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FDMToDoListProject.Models;
 
 namespace FDMToDoListProject.DataAccess.Repository.IRepository
 {
-	public interface ICategoryRepository : IRepository<Category>
+	internal interface IUnitOfWork
 	{
-		void Update(Category obj);
+		ICategoryRepository Category { get; }
 
-		public void Save();
+		void Save();
 	}
 }

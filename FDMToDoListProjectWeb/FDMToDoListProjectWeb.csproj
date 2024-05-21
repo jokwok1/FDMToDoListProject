@@ -14,6 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
   </ItemGroup>
 
@@ -21,6 +22,10 @@
     <ProjectReference Include="..\FDMToDoListProject.DataAccess\FDMToDoListProject.DataAccess.csproj" />
     <ProjectReference Include="..\FDMToDoListProject.Models\FDMToDoListProject.Models.csproj" />
     <ProjectReference Include="..\FDMToDoListProject.Utility\FDMToDoListProject.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

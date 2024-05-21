@@ -2,9 +2,10 @@ using System.Diagnostics;
 using FDMToDoListProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FDMToDoListProject.Controllers
+namespace FDMToDoListProjectWeb.Areas.Customer.Controllers
 {
-    public class HomeController : Controller
+	[Area("Customer")]
+	public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
