@@ -1,5 +1,7 @@
 
 using FDMToDoListProject.DataAccess.Data;
+using FDMToDoListProject.DataAccess.Repository.IRepository;
+using FDMToDoListProject.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseInMemoryDatabase("ToDoListTracker"); // mention the db name using in memoery
 });
+
+//Add repo for dependency injection
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 

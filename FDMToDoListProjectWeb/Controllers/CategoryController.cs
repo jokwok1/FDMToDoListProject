@@ -1,4 +1,5 @@
 ﻿using FDMToDoListProject.DataAccess.Data;
+using FDMToDoListProject.DataAccess.Repository.IRepository;
 using FDMToDoListProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,16 +7,16 @@ namespace FDMToDoListProject.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _categoryRepo;
 
-        public CategoryController(ApplicationDbContext db)
+        public CategoryController(ICategoryRepository db)
         {
-            _db = db; // constructor to access to db
+			_categoryRepo = db; // constructor to access to db
         }
 
         public IActionResult Index()
         {
-            var objCategoryList = _db.Categories.ToList();
+            var objCategoryList = _categoryRepo.GetAll().ToList();
             Console.Write(objCategoryList);
             return View(objCategoryList); // pass the object into the view
         }
@@ -39,8 +40,8 @@ namespace FDMToDoListProject.Controllers
                 return View(); // if validation check fails, stay on the page
             }
 
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
+			_categoryRepo.Add(obj);
+			_categoryRepo.Save();
             return RedirectToAction("Index", "Category");
             // create a redirection to reload list, and you can explictly state
             //which controller to use
@@ -53,7 +54,7 @@ namespace FDMToDoListProject.Controllers
                 return NotFound();
             }
 
-            Category categoryFromDb = _db.Categories.Find(id); //Find uses primary key
+            Category categoryFromDb = _categoryRepo.Get(u => u.Id == id); //Find uses primary key
             //Other methods that dont need to work with id
             //Category categoryFromDb1 = _db.Categories.FirstOrDefault(u => u.Name == "name");
             if (categoryFromDb == null)
@@ -67,8 +68,8 @@ namespace FDMToDoListProject.Controllers
 		public IActionResult Edit(Category obj)
 		{
 
-			_db.Categories.Update(obj); //update method
-			_db.SaveChanges();
+			_categoryRepo.Update(obj);
+			_categoryRepo.Save();
 			return RedirectToAction("Index", "Category");
 		}
 
@@ -78,7 +79,7 @@ namespace FDMToDoListProject.Controllers
 			{
 				return NotFound();
 			}
-			Category categoryFromDb = _db.Categories.Find(id); 
+			Category categoryFromDb = _categoryRepo.Get(u => u.Id == id);
 			if (categoryFromDb == null)
 			{
 				return NotFound();
@@ -89,13 +90,13 @@ namespace FDMToDoListProject.Controllers
 		[HttpPost, ActionName("Delete")]
 		public IActionResult DeletePOST(int? id)
 		{
-			Category categoryFromDb = _db.Categories.Find(id);
+			Category categoryFromDb = _categoryRepo.Get(u => u.Id == id);
 			if (categoryFromDb == null)
 			{
 				return NotFound();
 			}
-			_db.Categories.Remove(categoryFromDb); //update method
-			_db.SaveChanges();
+			_categoryRepo.Remove(categoryFromDb); //update method
+			_categoryRepo.Save();
 			return RedirectToAction("Index", "Category");
 		}
 	}
