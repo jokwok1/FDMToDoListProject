@@ -1,8 +1,8 @@
 using System.Diagnostics;
-using FDMToDoListProjectWeb.Models;
+using FDMToDoListProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FDMToDoListProjectWeb.Controllers
+namespace FDMToDoListProject.Controllers
 {
     public class HomeController : Controller
     {

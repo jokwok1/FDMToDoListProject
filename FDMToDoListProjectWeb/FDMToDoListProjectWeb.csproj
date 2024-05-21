@@ -17,4 +17,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FDMToDoListProject.DataAccess\FDMToDoListProject.DataAccess.csproj" />
+    <ProjectReference Include="..\FDMToDoListProject.Models\FDMToDoListProject.Models.csproj" />
+    <ProjectReference Include="..\FDMToDoListProject.Utility\FDMToDoListProject.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

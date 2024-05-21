@@ -1,7 +1,7 @@
-﻿using FDMToDoListProjectWeb.Models;
+﻿using FDMToDoListProject.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FDMToDoListProjectWeb.Data
+namespace FDMToDoListProject.DataAccess.Data
 {
     public class ApplicationDbContext: DbContext
     {

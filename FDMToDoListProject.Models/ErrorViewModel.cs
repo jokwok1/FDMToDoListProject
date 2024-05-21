@@ -1,4 +1,4 @@
-namespace FDMToDoListProjectWeb.Models
+namespace FDMToDoListProject.Models
 {
     public class ErrorViewModel
     {

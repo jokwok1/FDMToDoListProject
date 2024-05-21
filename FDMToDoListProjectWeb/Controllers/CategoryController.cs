@@ -1,8 +1,8 @@
-﻿using FDMToDoListProjectWeb.Data;
-using FDMToDoListProjectWeb.Models;
+﻿using FDMToDoListProject.DataAccess.Data;
+using FDMToDoListProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FDMToDoListProjectWeb.Controllers
+namespace FDMToDoListProject.Controllers
 {
     public class CategoryController : Controller
     {
