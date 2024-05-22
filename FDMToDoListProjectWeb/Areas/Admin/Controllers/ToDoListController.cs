@@ -21,7 +21,7 @@ namespace FDMToDoListProjectWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var objToDoListList = _toDoListRepo.GetAll().ToList();
+            var objToDoListList = _toDoListRepo.GetAll(includeProperties:"Category").ToList();
             
             return View(objToDoListList); // pass the object into the view
         }
@@ -64,7 +64,7 @@ namespace FDMToDoListProjectWeb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            ToDoList toDoListFromDb = _toDoListRepo.Get(u => u.Id == id); //Find uses primary key
+			ToDoList toDoListFromDb = _toDoListRepo.Get(u => u.Id == id); //Find uses primary key
             //Other methods that dont need to work with id
             //ToDoList ToDoListFromDb1 = _db.Categories.FirstOrDefault(u => u.Name == "name");
             if (toDoListFromDb == null)
@@ -77,8 +77,8 @@ namespace FDMToDoListProjectWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(ToDoList obj)
         {
-
-            _toDoListRepo.Update(obj);
+			
+			_toDoListRepo.Update(obj);
             _toDoListRepo.Save();
             return RedirectToAction("Index", "ToDoList");
         }

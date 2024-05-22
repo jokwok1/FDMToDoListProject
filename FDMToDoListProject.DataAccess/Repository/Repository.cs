@@ -18,22 +18,44 @@ namespace FDMToDoListProject.DataAccess.Repository
         {
 			_db = db;
 			this.dbSet = _db.Set<T>(); // create a generic db set
-        }
+			_db.ToDoLists.Include(u => u.Category);
+			//can extend even more
+			//_db.ToDoLists.Include(u => u.Category).Include(....)
+		}
         public void Add(T entity)
 		{
 			dbSet.Add(entity);
 		}
 
-		public T Get(Expression<Func<T, bool>> filter)
+		public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
 		{
 			IQueryable<T> query = dbSet;
 			query = query.Where(filter);
+			if (!string.IsNullOrEmpty(includeProperties))
+			{
+				foreach (var includeProp in includeProperties
+					.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					query = query.Include(includeProp);
+				}
+			}
 			return query.FirstOrDefault();
 		}
 
-		public IEnumerable<T> GetAll()
+		public IEnumerable<T> GetAll(string? includeProperties = null)
 		{
 			IQueryable<T> query = dbSet;
+			if(!string.IsNullOrEmpty(includeProperties))
+			{
+				//properties will be seperated by commar eg: Category, CoverType
+				//so must seperate by commar
+				foreach(var includeProp in includeProperties
+					.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
+				{
+					query = query.Include(includeProp);
+					// dynamic, allow for multiple properties
+				}
+			}
 			return query.ToList();
 		}
 

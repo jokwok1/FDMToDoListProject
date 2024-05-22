@@ -47,7 +47,7 @@
 				<td>@obj.DueDate</td>
 				<td>@obj.HighPriority</td>
 				<td>@obj.Completed</td>
-				<td>@obj.Category</td>
+				<td>@obj.Category.Name</td>
 				<td>
 					<div class="w-76 btn-group" role="group">
 						<a asp-controller="ToDoList" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">

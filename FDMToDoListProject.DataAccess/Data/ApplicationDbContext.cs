@@ -1,9 +1,10 @@
 ﻿using FDMToDoListProject.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FDMToDoListProject.DataAccess.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext: IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -15,11 +16,13 @@ namespace FDMToDoListProject.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             //define relationship
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.ToDoLists)
-                .WithOne(a => a.Category)
-                .HasForeignKey(a => a.CategoryId);
+            //modelBuilder.Entity<Category>()
+            //    .HasMany(c => c.ToDoLists)
+            //    .WithOne(a => a.Category)
+            //    .HasForeignKey(a => a.CategoryId);
 
             modelBuilder.Entity<Category>()
                 .HasData(
