@@ -1,0 +1,67 @@
+﻿@model List<ToDoList>  
+<!-- state type that is being returned, can write C# code using sign, lower case -->
+
+<div class="container">
+	<div class="row pt-4 pb-3">
+		<div class ="col-6">
+			<h2 class="text-primary">ToDoList List</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controller="ToDoList" asp-action="Create" class ="btn btn-primary">
+				<i class="bi bi-plus-circle-dotted"></i> Create New ToDoList
+			</a>
+		</div>
+	</div>
+<table class="table table-bordered table-striped">
+	<!-- using Bootstrap classes-->
+	<tr>
+		<th>
+			ToDoList Name
+		</th>
+		<th>
+			Description
+		</th>
+		<th>
+			Date Added
+		</th>
+		<th>
+			Due Date
+		</th>
+		<th>
+			High Priority?
+		</th>
+		<th>
+			Completed
+		</th>
+		<th>
+			Category
+		</th>
+		<th></th>
+	<tbody> 
+		@foreach (var obj in Model.OrderBy(u=>u.Id))
+		{
+			<tr>
+				<td>@obj.Title</td>
+				<td>@obj.Description</td>
+				<td>@obj.DateAdded</td>
+				<td>@obj.DueDate</td>
+				<td>@obj.HighPriority</td>
+				<td>@obj.Completed</td>
+				<td>@obj.Category</td>
+				<td>
+					<div class="w-76 btn-group" role="group">
+						<a asp-controller="ToDoList" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+								<i class="bi bi-pencil-square"></i>Edit
+						</a>
+							<a asp-controller="ToDoList" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+								<i class="bi bi-trash"></i>Delete
+							</a>
+					</div>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+</div>

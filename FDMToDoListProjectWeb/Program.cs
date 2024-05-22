@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Add repo for dependency injection
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IToDoListRepository, ToDoListRepository>();
 
 var app = builder.Build();
 

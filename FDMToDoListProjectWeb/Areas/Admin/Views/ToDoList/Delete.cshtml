@@ -1,0 +1,61 @@
+﻿@model ToDoList
+
+<form method="post">
+	<input asp-for="Id" hidden /> <!--Ensure id is populated, neccessary if your 
+	property not labelled as id, but good to always have-->
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Delete ToDoList</h2>
+		</div>
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3 row">
+			<label asp-for="Title"></label>
+			<input asp-for="Title" disabled class="form-control" />
+		</div>
+
+		<div class="mb-3 row">
+			<label asp-for="Description"></label>
+			<input asp-for="Description" disabled class="form-control" />
+		</div>
+
+		<div class="mb-3 row">
+			<label asp-for="DueDate"></label>
+			<input asp-for="DueDate" disabled class="form-control" />
+		</div>
+
+		<div class="mb-3 row">
+			<label asp-for="Completed"></label>
+			<input asp-for="Completed" disabled class="form-control" />
+		</div>
+
+		<div class="mb-3 row">
+			<label asp-for="HighPriority"></label>
+			<input asp-for="HighPriority" disabled class="form-control" />
+		</div>
+
+		<div class="mb-3 row">
+			<label asp-for="CategoryId"></label>
+			<input asp-for="CategoryId" disabled class="form-control" />
+		</div>
+
+		<div class="row">
+			<div class="col-6 col-md-3">
+				<button type="submit" class="btn btn-danger form-control">Delete</button>
+			</div>
+			<div class="col-6 col-md-3">
+				<a asp-controller="ToDoList" asp-action="Index" class="btn btn-outline-secondary form-control">Back to List</a>
+			</div>
+		</div>
+
+
+	</div>
+
+
+</form>
+<!--As it is script related, need to add in default scripts,
+now validation will first be done on client side-->
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
